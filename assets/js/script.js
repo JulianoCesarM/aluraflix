@@ -6,42 +6,79 @@ listaFilmes = [
   "https://m.media-amazon.com/images/M/MV5BMjVjZGU5ZTktYTZiNC00N2Q1LThiZjMtMDVmZDljN2I3ZWIwXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1000_.jpg",
   "https://s2-globo-play.glbimg.com/RFsyu9DMDOKXXiCtMDDLpHLbrxo=/362x536/https://s2-globo-play.glbimg.com/BMF3FEBrdfgYhINeUIo4bsen1Yo=/https://s2.glbimg.com/nG3Bh6hAKSSKcF6xLeSUFL8PaBM=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2021/T/R/NEwrt0RkyOGTAmyNmUyQ/1498208-poster.jpg",
 ]
-
-// Filmes usando for
-document.write("<h1>Filmes usando for</h1>")
-let lastFilme = ""
-for (let index = 0; index < listaFilmes.length; index++) {
-  const element = listaFilmes[index]
-  if (lastFilme == element) {
-    console.log("Link do filme é igual ao anterior")
-    break
-  }
-  document.write("<img src=" + element + ">")
-  lastFilme = element
+// Checando se a url já consta no listaFilmes
+function checarLinkExistente(link) {
+  return listaFilmes.includes(link)
 }
+function adicionarFilmes() {
+  const addFilmes = document.querySelector("#addFilmes")
 
-// Filmes usando foreach
-document.write("<h1>Filmes usando foreach</h1>")
-lastFilme = ""
-listaFilmes.forEach((element) => {
-  if (lastFilme == element) {
-    return console.log("Link do filme é igual ao anterior")
-  }
-  document.write("<img src=" + element + ">")
-  lastFilme = element
-})
+  const novoFilme = addFilmes.value
 
-// Filmes usando while
-document.write("<h1>Filmes usando while</h1>")
-let index = 0
-lastFilme = ""
-while (true) {
-  if (index == listaFilmes.length) break
-  if (lastFilme == listaFilmes[index]) {
-    console.log("Link do filme é igual ao anterior")
-    break
+  // Checando se o link que vier é .jpg
+  let firstCheck = novoFilme.slice(-4)
+  if (firstCheck !== ".jpg") return console.log("Link não é compatível")
+
+  if (checarLinkExistente(novoFilme)) {
+    console.log("Link já existe na lista de filmes.")
+  } else {
+    listaFilmes.push(novoFilme)
+    adicionarFilmesNaTela()
   }
-  document.write("<img src=" + listaFilmes[index] + ">")
-  lastFilme = listaFilmes[index]
-  index++
+
+  // Chama a função para adicionar filmes à tela
+  adicionarFilmesNaTela()
 }
+adicionarFilmesNaTela()
+function adicionarFilmesNaTela() {
+  const containerFilmes = document.querySelector("#filmesContainer")
+  containerFilmes.innerHTML = "" // Limpa o conteúdo anterior
+
+  for (let index = 0; index < listaFilmes.length; index++) {
+    const element = listaFilmes[index]
+
+    // Criando elemento imagem
+    const imgElement = document.createElement("img")
+    imgElement.src = element
+
+    containerFilmes.appendChild(imgElement)
+  }
+}
+// // Filmes usando for
+// document.write("<h1>Filmes usando for</h1>")
+// let lastFilme = ""
+// for (let index = 0; index < listaFilmes.length; index++) {
+//   const element = listaFilmes[index]
+//   if (lastFilme == element) {
+//     console.log("Link do filme é igual ao anterior")
+//     break
+//   }
+//   document.write("<img src=" + element + ">")
+//   lastFilme = element
+// }
+
+// // Filmes usando foreach
+// document.write("<h1>Filmes usando foreach</h1>")
+// lastFilme = ""
+// listaFilmes.forEach((element) => {
+//   if (lastFilme == element) {
+//     return console.log("Link do filme é igual ao anterior")
+//   }
+//   document.write("<img src=" + element + ">")
+//   lastFilme = element
+// })
+
+// // Filmes usando while
+// document.write("<h1>Filmes usando while</h1>")
+// let index = 0
+// lastFilme = ""
+// while (true) {
+//   if (index == listaFilmes.length) break
+//   if (lastFilme == listaFilmes[index]) {
+//     console.log("Link do filme é igual ao anterior")
+//     break
+//   }
+//   document.write("<img src=" + listaFilmes[index] + ">")
+//   lastFilme = listaFilmes[index]
+//   index++
+// }
