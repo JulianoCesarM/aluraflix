@@ -6,6 +6,7 @@ body {
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
+  color: #ffffff;
 }
 
 .container {
@@ -40,4 +41,29 @@ body > img {
 
 img {
   max-height: 250px;
+}
+.content {
+  display: flex;
+  flex-flow: column;
+  margin: 10px auto;
+  width: 500px;
+  gap: 1rem;
+}
+.content label {
+  font-size: large;
+}
+.content input {
+  height: 30px;
+  font-size: large;
+}
+.content button {
+  height: 30px;
+  background-color: rgb(43, 102, 190);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.content button:hover {
+  background-color: blue;
 }
