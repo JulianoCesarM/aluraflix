@@ -12,22 +12,25 @@ function checarLinkExistente(link) {
 }
 function adicionarFilmes() {
   const addFilmes = document.querySelector("#addFilmes")
+  const msgErro = document.querySelector("#msgErro")
 
   const novoFilme = addFilmes.value
 
   // Checando se o link que vier é .jpg
   let firstCheck = novoFilme.slice(-4)
-  if (firstCheck !== ".jpg") return console.log("Link não é compatível")
+  if (firstCheck !== ".jpg") {
+    msgErro.hidden = false
+    return (msgErro.innerHTML = `Link não é compatível`)
+  }
 
   if (checarLinkExistente(novoFilme)) {
-    console.log("Link já existe na lista de filmes.")
+    msgErro.hidden = false
+    return (msgErro.innerHTML = `Link já existe na lista de filmes.`)
   } else {
+    msgErro.hidden = true
     listaFilmes.push(novoFilme)
     adicionarFilmesNaTela()
   }
-
-  // Chama a função para adicionar filmes à tela
-  adicionarFilmesNaTela()
 }
 adicionarFilmesNaTela()
 function adicionarFilmesNaTela() {

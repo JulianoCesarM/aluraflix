@@ -67,3 +67,7 @@ img {
 .content button:hover {
   background-color: blue;
 }
+#msgErro {
+  background-color: red;
+  padding: 10px;
+}
